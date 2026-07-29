@@ -1,0 +1,59 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pseudopair-toolkit"
+version = "0.1.0"
+description = "Reusable acquisition, preprocessing, pseudo-control pairing, evaluation, and aggregation workflow for single-cell perturbation data"
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [{name = "Junfan Chen"}]
+dependencies = ["PyYAML>=6.0", "numpy>=1.24", "pandas>=2.0"]
+
+[project.optional-dependencies]
+core = [
+  "anndata>=0.10",
+  "scanpy>=1.10",
+  "scipy>=1.10",
+  "scikit-learn>=1.3",
+  "h5py>=3.9",
+  "tqdm>=4.66",
+  "matplotlib>=3.8",
+]
+mlp = ["torch>=2.1"]
+ot = ["POT>=0.9"]
+parquet = ["pyarrow>=14"]
+full = [
+  "anndata>=0.10",
+  "scanpy>=1.10",
+  "scipy>=1.10",
+  "scikit-learn>=1.3",
+  "h5py>=3.9",
+  "tqdm>=4.66",
+  "matplotlib>=3.8",
+  "torch>=2.1",
+  "POT>=0.9",
+  "pyarrow>=14",
+]
+dev = ["pytest>=8", "ruff>=0.5", "build>=1.2"]
+
+[project.scripts]
+pseudopair = "pseudopair.cli:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+pseudopair = ["templates/*.yaml"]
+
+[tool.ruff]
+line-length = 110
+target-version = "py310"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
