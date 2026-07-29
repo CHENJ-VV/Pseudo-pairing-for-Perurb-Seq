@@ -1,0 +1,52 @@
+{
+  "global": {
+    "path_mode": "shared_pseudo_pairing_pipeline",
+    "pairing_root": "${PAIRING_ROOT:-../work/pairing}",
+    "evaluation_root": "${EVALUATION_ROOT:-../work/evaluation}",
+    "processed_data_root": "${PROCESSED_DATA_ROOT:-../work/processed}",
+    "dataset_ids": [
+      "Replogle_RPE"
+    ],
+    "manifest_dataset_names": {
+      "Replogle_RPE": "Replogle_rpe_data"
+    },
+    "perturbed_groups": [
+      "single"
+    ],
+    "use_generation_run_config": true,
+    "use_manifest_pseudo_files": true,
+    "use_selected_variants": false,
+    "selection_table_name": "selected_variants_TEMPLATE_EDIT_ME.csv",
+    "include_s0_when_using_selected_variants": true,
+    "only_existing_processed_files": true,
+    "skip_datasets_without_pseudo": true,
+    "require_existing_pseudo_files": true,
+    "write_pseudo_file_index": true,
+    "layer": null,
+    "perturbation_key": "perturbation_label",
+    "max_genes": 33694,
+    "min_mean": 0.01,
+    "min_frac": 0.01,
+    "zscore_eps": 1e-06,
+    "max_control_cells_for_programs": 50000,
+    "corr_threshold": 0.35,
+    "min_correlated_partners": 5,
+    "cluster_method": "auto",
+    "leiden_resolution": 1.0,
+    "min_program_size": 10,
+    "max_program_size": null,
+    "min_gene_centroid_corr": 0.2,
+    "save_corr_matrix": false,
+    "pseudo_glob": "**/pseudo_control*.h5ad",
+    "chunk_size": 30000,
+    "save_cell_level_scores": false,
+    "seed": 0
+  },
+  "dataset_overrides": {
+    "Replogle_RPE": {
+      "groups": [
+        "single"
+      ]
+    }
+  }
+}

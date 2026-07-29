@@ -1,0 +1,37 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "gene-program-pseudocontrol-eval"
+version = "2.1.0"
+description = "Control-derived gene-program evaluation of pseudo-control perturbation effects"
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [{name = "Junfan Chen"}]
+dependencies = [
+  "anndata>=0.10",
+  "numpy>=1.24",
+  "pandas>=2.0",
+  "scipy>=1.10",
+  "scikit-learn>=1.3",
+  "tqdm>=4.66",
+]
+
+[project.optional-dependencies]
+leiden = ["igraph>=0.11", "leidenalg>=0.10"]
+notebooks = ["jupyter>=1.0"]
+dev = ["pytest>=8", "ruff>=0.5"]
+full = ["igraph>=0.11", "leidenalg>=0.10", "jupyter>=1.0"]
+
+[project.scripts]
+gene-program-eval = "run_gene_program_pipeline:main"
+
+[tool.setuptools]
+py-modules = ["run_gene_program_pipeline"]
+
+[tool.setuptools.packages.find]
+include = ["gene_program_pipeline_pkg*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
