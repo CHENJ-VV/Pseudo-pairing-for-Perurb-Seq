@@ -83,7 +83,7 @@ SEACells is intentionally not installed automatically because installation pract
 ### Editable installation from the repository
 
 ```bash
-git clone <YOUR_GITHUB_REPOSITORY_URL>
+git clone git@github.com:CHENJ-VV/Pseudo-pairing-for-Perurb-Seq.git
 cd PseudoPairingToolkit
 python -m pip install --upgrade pip
 python -m pip install -e ".[full]"
