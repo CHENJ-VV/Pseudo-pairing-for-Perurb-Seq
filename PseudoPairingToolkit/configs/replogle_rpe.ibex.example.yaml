@@ -1,0 +1,76 @@
+project:
+  dataset_id: Replogle_RPE
+  workdir: /ibex/user/chenj0i/Perturbation/pseudopair_runs
+
+acquisition:
+  enabled: false
+
+preprocessing:
+  enabled: false
+  input_h5ad: /ibex/user/chenj0i/Perturbation/data/raw_data/Replogle_rpe1.h5ad
+  output_dir: /ibex/user/chenj0i/Perturbation/data/processed_data/Replogle_RPE
+
+pairing:
+  enabled: true
+  control_h5ad: /ibex/user/chenj0i/Perturbation/data/processed_data/Replogle_RPE/groups/Replogle_RPE_control_processed.h5ad
+  perturbed_h5ads:
+    single: /ibex/user/chenj0i/Perturbation/data/processed_data/Replogle_RPE/groups/Replogle_RPE_single_processed.h5ad
+  output_root: /ibex/project/c2366/Perturb_data/Replogle_rpe_data
+  strategies_to_run: [S5_SEACell_OT_sampled_average]
+  expr_layer: X
+  embedding_key: X_pca
+  perturbation_key: auto
+  random_seeds: [0, 1, 2, 3, 4]
+  max_pairs_per_perturbation: null
+  pair_selection_seed: 42
+  batch_size: 4096
+  matrix_batch_size: 4096
+  sampling_replace: true
+  seacell_settings:
+    - setting_id: nmc_500
+      n_metacells: 500
+      n_waypoint_eigs: 10
+      seacells_n_iter: 100
+      seacell_seed: 42
+  s3_n_metacells_to_average_values: [3, 5, 10]
+  s5_top_k_values: [5]
+  sample_cells_per_metacell: 10
+  ot_reg: 0.05
+  ot_max_iter: 2000
+  ot_tol: 1.0e-7
+  cost_metric: sqeuclidean
+  control_mass: size
+  overwrite_memberships: false
+  overwrite_assignments: false
+  overwrite_sampled_outputs: false
+
+evaluation:
+  enabled: true
+  eval_root: /ibex/user/chenj0i/Perturbation/evaluation/Replogle_RPE_pseudo_pairing_evaluation
+  perturbed_groups_to_evaluate: [single]
+  perturbation_key: perturbation_key
+  evaluation_tasks: [control_manifold, perturbation_effect, mlp]
+  max_eval_genes: 3000
+  seed: 42
+  mlp_tasks: [forward, inverse_strategy_delta, inverse_common_delta]
+  device: auto
+  batch_size: 256
+  forward_epochs: 30
+  inverse_epochs: 30
+  early_stop_patience: 3
+  learning_rate: 0.001
+  weight_decay: 0.00001
+  hidden_dim: 1024
+  latent_dim: 512
+  pert_emb_dim: 256
+  dropout: 0.15
+  skip_existing_forward: true
+  skip_existing_inverse: true
+
+analysis:
+  enabled: true
+  run_aggregation: true
+  run_final_comparison: false
+  perturbed_groups: [single]
+  allow_missing_tasks: false
+  strict_metrics: true
